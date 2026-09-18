@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RespirApp - Calidad del Aire en Medellín (SIATA)</title>
+    <meta name="description" content="Dashboard en tiempo real de la calidad del aire en Medellín utilizando datos del SIATA.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-wind"></i> RespirApp
+        </div>
+        <div class="nav-links">
+            <a href="#landing">Inicio</a>
+            <a href="#dashboard">Dashboard</a>
+            <div class="api-config">
+                <input type="password" id="apiKeyInput" placeholder="API Key (Opcional)" title="Configuración de API Key (Simulada)">
+                <button id="saveApiKey"><i class="fa-solid fa-key"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page Section -->
+    <section id="landing" class="landing-section">
+        <div class="hero-content">
+            <h1>Respira Conciencia</h1>
+            <p class="subtitle">Conoce la calidad del aire en Medellín y el Valle de Aburrá en tiempo real.</p>
+            <div class="context-cards">
+                <div class="card glass">
+                    <i class="fa-solid fa-triangle-exclamation icon-warning"></i>
+                    <h3>El Problema</h3>
+                    <p>El material particulado (PM2.5) afecta gravemente la salud respiratoria. En épocas de contingencia, las estaciones superan los límites de la OMS (15 µg/m³).</p>
+                </div>
+                <div class="card glass">
+                    <i class="fa-solid fa-shield-heart icon-safe"></i>
+                    <h3>La Decisión</h3>
+                    <p>¿Deberías salir a correr hoy? ¿Es necesario usar tapabocas? Usa nuestros datos para proteger a tu familia y tomar decisiones informadas.</p>
+                </div>
+                <div class="card glass">
+                    <i class="fa-solid fa-satellite-dish icon-data"></i>
+                    <h3>Los Datos</h3>
+                    <p>Utilizamos la red oficial del SIATA para brindar información transparente, filtrando datos atípicos y presentando el Top de estaciones más afectadas.</p>
+                </div>
+            </div>
+            <a href="#dashboard" class="btn-primary">Ver Dashboard <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <!-- Background decorative elements -->
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard-section">
+        <div class="dashboard-header">
+            <h2>Monitor de PM2.5 (En Vivo)</h2>
+            <div class="controls">
+                <button id="refreshData" class="btn-secondary"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- Map Container -->
+            <div class="map-container glass">
+                <div id="map"></div>
+                <div class="map-legend">
+                    <span class="legend-item"><span class="dot good"></span> Bueno (<=12)</span>
+                    <span class="legend-item"><span class="dot moderate"></span> Moderado (13-35)</span>
+                    <span class="legend-item"><span class="dot unhealthy"></span> Dañino (>35)</span>
+                </div>
+            </div>
+            
+            <!-- Sidebar Analytics -->
+            <div class="sidebar glass">
+                <h3><i class="fa-solid fa-ranking-star"></i> Top 10 Estaciones (Mayor PM2.5)</h3>
+                <p class="small-text">Límite recomendado OMS: 15 µg/m³</p>
+                <div id="stationsList" class="stations-list">
+                    <!-- Dynamic content loaded via JS -->
+                    <div class="loading-spinner"><i class="fa-solid fa-spinner fa-spin"></i> Cargando datos...</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Desarrollado consumiendo datos abiertos del SIATA. Prueba técnica de Machine Learning.</p>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
